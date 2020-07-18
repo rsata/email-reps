@@ -29,7 +29,7 @@ const Row = ({
         : null}
       </Table.TextCell>      
     </Table.Row>
-  )
+  ) 
 }
 
 const ContactTable = ({data}) => {
