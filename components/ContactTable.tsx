@@ -33,7 +33,6 @@ const Row = ({
 }
 
 const ContactTable = ({data}) => {
-  console.log(data)
   if (!data) return null;
   return (
     <>
