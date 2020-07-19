@@ -22,8 +22,13 @@ const Home = () => {
         method: 'post',
         body: address
       })
-      let results = await res.json()      
-      setLookupResults(results)
+      if (res.status === 200) {
+        let results = await res.json()      
+        setLookupResults(results)
+      } else {
+        let error = await res.json()
+        toaster.danger(error.message)
+      }
     } 
     catch (err) {
       console.log(err)
