@@ -1,3 +1,4 @@
+import SocialIcon from './SocialIcon'
 import { Table, Avatar, Text, IconButton } from 'evergreen-ui'
 
 const Row = ({
@@ -28,41 +29,15 @@ const Row = ({
         ? <a href={urls ? urls[0]: null} target="_blank">{urls[0]}</a>
         : null}
       </Table.TextCell>      
+      <Table.TextCell>{channels 
+        ? channels.map(channel => {
+          console.log(channel)
+          return <SocialIcon key={channel.id} {...channel} />
+        })
+        : null}
+      </Table.TextCell>      
     </Table.Row>
   )
 }
 
-const ContactTable = ({data}) => {
-  if (!data) return null;
-  return (
-    <>
-      <Table>
-        <Table.Head>
-          {/* <Table.SearchHeaderCell /> */}
-          <Table.TextHeaderCell>
-            Name
-          </Table.TextHeaderCell>
-          <Table.TextHeaderCell>
-            Phone
-          </Table.TextHeaderCell>
-          <Table.TextHeaderCell>
-            Email
-          </Table.TextHeaderCell>
-          <Table.TextHeaderCell>
-            Website
-          </Table.TextHeaderCell>
-          <Table.TextHeaderCell>
-            Social
-          </Table.TextHeaderCell>
-        </Table.Head>
-        <Table.Body height="auto">  
-          {data.map(profile => {
-            return <Row {...profile} />
-          })}
-        </Table.Body>
-      </Table>
-    </>
-  )
-}
-
-export default ContactTable
+export default Row
