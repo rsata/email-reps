@@ -31,7 +31,6 @@ const Row = ({
       </Table.TextCell>      
       <Table.TextCell>{channels 
         ? channels.map(channel => {
-          console.log(channel)
           return <SocialIcon key={channel.id} {...channel} />
         })
         : null}

@@ -25,7 +25,7 @@ const ContactTable = ({data}) => {
         </Table.Head>
         <Table.Body height="auto">  
           {data.map(profile => {
-            return <Row {...profile} />
+            return <Row key={profile.name} {...profile} />
           })}
         </Table.Body>
       </Table>
