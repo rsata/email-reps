@@ -20,6 +20,7 @@ export default async (req, res) => {
     res.json(response.data.officials)
   }  
   catch (err) {
-    console.log(err.response.data)
+    res.statusCode = 400
+    res.json(err.response.data)
   }
 }

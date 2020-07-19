@@ -1,6 +1,5 @@
-import Head from 'next/head'
 import { useState } from 'react'
-import { TextInputField, Pane, IconButton, majorScale } from 'evergreen-ui'
+import { TextInputField, Pane, IconButton, majorScale, toaster } from 'evergreen-ui'
 import ContactTable from '../components/ContactTable'
 
 const Home = () => {
@@ -18,12 +17,17 @@ const Home = () => {
   }
 
   const lookup = async (address: string) => {
-    let res = await fetch('/api/lookup', {
-      method: 'post',
-      body: address
-    })
-    let results = await res.json()
-    setLookupResults(results)
+    try {
+      let res = await fetch('/api/lookup', {
+        method: 'post',
+        body: address
+      })
+      let results = await res.json()      
+      setLookupResults(results)
+    } 
+    catch (err) {
+      console.log(err)
+    }
   }
 
   const handleSubmit = e => {
@@ -33,10 +37,6 @@ const Home = () => {
 
   return (
     <>
-      <Head>
-        <title>Email Your Reps</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       <Pane
         display="flex"
         alignItems="center" 
@@ -55,11 +55,11 @@ const Home = () => {
               isInvalid={isAddressInvalid}
               label="Address or Zip Code"
               placeholder="123 Street"
-              width={majorScale(50)}
+              maxWidth={majorScale(50)}
             />
             <IconButton icon="search" intent="success" onClick={handleSubmit} marginLeft={majorScale(1)}/>
           </Pane>        
-          <Pane width="90%">
+          <Pane maxWidth="90%">
             <ContactTable data={lookupResults} />
           </Pane>
       </Pane>        

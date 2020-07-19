@@ -29,7 +29,7 @@ export default class MyDocument extends Document<any> {
     return (
       <html>
         <Head>
-          <title>SSR in Next.js</title>
+          <title>Email Your Reps</title>
           <style dangerouslySetInnerHTML={{ __html: css }} />
         </Head>
 
