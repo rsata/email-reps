@@ -67,7 +67,7 @@ const Home = () => {
                 isInvalid={isAddressInvalid}
                 label="Address or Zip Code"
                 placeholder="123 Street"
-                maxWidth={majorScale(50)}
+                width="70vw"
               />
             </form>
             <IconButton icon="search" intent="success" onClick={handleSubmit} marginLeft={majorScale(1)}/>
@@ -101,12 +101,12 @@ const Home = () => {
                 isInvalid={isAddressInvalid}
                 label="Address or Zip Code"
                 placeholder="123 Street"
-                maxWidth={majorScale(50)}
+                width="70vw"
               />
             </form>
             <IconButton icon="search" intent="success" onClick={handleSubmit} marginLeft={majorScale(1)}/>
           </Pane>        
-          <Pane maxWidth="90%">
+          <Pane width="90vw">
             <ContactTable data={lookupResults} />
           </Pane>
       </Pane>        
