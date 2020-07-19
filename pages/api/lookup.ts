@@ -17,7 +17,7 @@ export default async (req, res) => {
       }
     })
     res.statusCode = 200
-    res.json(response.data.officials)
+    res.json(response.data)
   }  
   catch (err) {
     res.statusCode = 400
