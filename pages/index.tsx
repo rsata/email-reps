@@ -1,11 +1,12 @@
 import { useState } from 'react'
-import { TextInputField, Pane, IconButton, majorScale, toaster } from 'evergreen-ui'
+import { TextInputField, Pane, IconButton, majorScale, toaster, Spinner } from 'evergreen-ui'
 import ContactTable from '../components/ContactTable'
 
 const Home = () => {
   const [address, setAddress] = useState('')
   const [isAddressInvalid, setIsAddressInvalid] = useState(false)
   const [lookupResults, setLookupResults] = useState()
+  const [isLoading, setLoadingState] = useState(false)
 
   const validate = (address: string | undefined): string => {
     if (address.length < 5) {
@@ -25,6 +26,7 @@ const Home = () => {
       if (res.status === 200) {
         let results = await res.json()      
         setLookupResults(results)
+        setLoadingState(false)
       } else {
         let error = await res.json()
         toaster.danger(error.message)
@@ -37,7 +39,43 @@ const Home = () => {
 
   const handleSubmit = e => {
     lookup(address)
+    setLoadingState(true)
     e.preventDefault()
+  }
+
+  if (isLoading) {
+    return (
+      <>
+        <Pane
+        display="flex"
+        alignItems="center" 
+        flexDirection="column"
+        width="100%"
+      >
+        <Pane 
+            display="flex"
+            justifyContent="center" 
+            alignItems="center" 
+            flexDirection="row"
+            marginTop={majorScale(5)}
+          >
+            <form
+              onSubmit={handleSubmit}
+            >
+              <TextInputField 
+                onChange={e => setAddress(validate(e.target.value || ''))}
+                isInvalid={isAddressInvalid}
+                label="Address or Zip Code"
+                placeholder="123 Street"
+                maxWidth={majorScale(50)}
+              />
+            </form>
+            <IconButton icon="search" intent="success" onClick={handleSubmit} marginLeft={majorScale(1)}/>
+          </Pane>        
+          <Spinner size={24} />
+      </Pane>    
+      </>
+    )
   }
 
   return (
@@ -55,13 +93,17 @@ const Home = () => {
             flexDirection="row"
             marginTop={majorScale(5)}
           >
-            <TextInputField 
-              onChange={e => setAddress(validate(e.target.value || ''))}
-              isInvalid={isAddressInvalid}
-              label="Address or Zip Code"
-              placeholder="123 Street"
-              maxWidth={majorScale(50)}
-            />
+            <form
+              onSubmit={handleSubmit}
+            >
+              <TextInputField 
+                onChange={e => setAddress(validate(e.target.value || ''))}
+                isInvalid={isAddressInvalid}
+                label="Address or Zip Code"
+                placeholder="123 Street"
+                maxWidth={majorScale(50)}
+              />
+            </form>
             <IconButton icon="search" intent="success" onClick={handleSubmit} marginLeft={majorScale(1)}/>
           </Pane>        
           <Pane maxWidth="90%">
