@@ -4,6 +4,11 @@ import Document, { Head, Main, NextScript } from 'next/document'
 import { extractStyles } from 'evergreen-ui'
 import * as snippet from '@segment/snippet';
 
+declare global {
+  interface Window {
+      analytics:any;
+  }
+}
 
 export default class MyDocument extends Document<any> {
   static getInitialProps({ renderPage }) {
