@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { TextInputField, Pane, IconButton, majorScale, toaster, Spinner } from 'evergreen-ui'
 import ContactTable from '../components/ContactTable'
 
@@ -27,6 +27,7 @@ const Home = () => {
         let results = await res.json()      
         setLookupResults(results)
         setLoadingState(false)
+        window.analytics.track('Lookup Successful')
       } else {
         let error = await res.json()
         toaster.danger(error.message)

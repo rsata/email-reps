@@ -2,6 +2,7 @@
 import React from 'react'
 import Document, { Head, Main, NextScript } from 'next/document'
 import { extractStyles } from 'evergreen-ui'
+import * as snippet from '@segment/snippet';
 
 
 export default class MyDocument extends Document<any> {
@@ -23,6 +24,14 @@ export default class MyDocument extends Document<any> {
     }
   }
 
+  renderSnippet() {
+    const opts = {
+      apiKey: process.env.AJS_WRITE_KEY
+    };
+
+    return snippet.min(opts);
+  }
+
   render() {
     const { css, hydrationScript } = this.props
 
@@ -31,6 +40,7 @@ export default class MyDocument extends Document<any> {
         <Head>
           <title>Email Your Reps</title>
           <style dangerouslySetInnerHTML={{ __html: css }} />
+          <script dangerouslySetInnerHTML={{ __html: this.renderSnippet() }} />
         </Head>
 
         <body>
