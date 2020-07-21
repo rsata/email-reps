@@ -71,7 +71,7 @@ const Home = () => {
           display="flex" 
           alignItems="left"
           flexDirection="column"
-          width="70%"
+          width="90%"
         >
           <Heading size={600}>Instructions</Heading>
           <Paragraph>
@@ -113,20 +113,19 @@ const Home = () => {
           marginTop={majorScale(4)}
           width="100%"
         >
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} style={{width: '86%'}}>
             <TextInputField 
               onChange={e => setAddress(validate(e.target.value || ''))}
               isInvalid={isAddressInvalid}
               label="Address or Zip Code"
               placeholder="123 Street"
-              width="70vh"
             />
           </form>
           <IconButton icon="search" intent="success" onClick={handleSubmit} marginLeft={majorScale(1)}/>
         </Pane>        
         {isLoading 
           ?  <Spinner size={24} />
-          : <Pane width="90vw"><ContactTable data={lookupResults} /></Pane>
+          : <Pane width="100%" overflowX="scroll"><ContactTable data={lookupResults} /></Pane>
         }        
       </Pane>        
     </>

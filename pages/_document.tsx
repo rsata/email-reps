@@ -46,6 +46,7 @@ export default class MyDocument extends Document<any> {
           <title>Email Your Reps</title>
           <style dangerouslySetInnerHTML={{ __html: css }} />
           <script dangerouslySetInnerHTML={{ __html: this.renderSnippet() }} />
+          <meta name="viewport" content="width=device-width; initial-scale=1.0" />
         </Head>
 
         <body>
