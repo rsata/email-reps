@@ -20,7 +20,7 @@ const ContactTable = ({data}) => {
     <>
       <Table 
         width="75em" 
-        margin="auto"
+        overflow-x="scroll"
       >
         <Table.Head>
           <Table.TextHeaderCell>
