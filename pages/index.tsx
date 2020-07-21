@@ -1,12 +1,19 @@
 import { useState } from 'react'
-import { TextInputField, Pane, IconButton, majorScale, toaster, Spinner } from 'evergreen-ui'
+import { TextInputField, Pane, IconButton, majorScale, toaster, Spinner, Paragraph, Text, Heading } from 'evergreen-ui'
+import ReactMarkdown from 'react-markdown'
+
 import ContactTable from '../components/ContactTable'
+import instructions from '../copy/instructions'
+import email from '../copy/email'
+import twitter from '../copy/twitter'
+import facebook from '../copy/facebook'
 
 const Home = () => {
   const [address, setAddress] = useState('')
   const [isAddressInvalid, setIsAddressInvalid] = useState(false)
   const [lookupResults, setLookupResults] = useState()
   const [isLoading, setLoadingState] = useState(false)
+  const [displayText, setDisplayText] = useState({twitter: false, facebook: false, email: false})
 
   const validate = (address: string | undefined): string => {
     if (address.length < 5) {
@@ -43,6 +50,12 @@ const Home = () => {
     setLoadingState(true)
     e.preventDefault()
   }
+  
+  const toggleText = type => {
+    console.log(type)
+    setDisplayText({...displayText, [type]: !displayText[type]})
+    console.log(displayText)
+  }
 
   return (
     <>
@@ -52,13 +65,51 @@ const Home = () => {
         flexDirection="column"
         width="100%"
       >
-
+        <Pane 
+          display="flex" 
+          alignItems="left"
+          flexDirection="column"
+          width="70%"
+        >
+          <Heading size={600}>Instructions</Heading>
+          <Paragraph>
+            <ReactMarkdown source={instructions} />          
+          </Paragraph> 
+          <Heading size={500} display="flex" flexDirection="row" marginTop={majorScale(2)}>Twitter {
+            displayText.twitter
+            ?  <IconButton icon="chevron-up" marginLeft={majorScale(1)} marginTop="-4px" onClick={() => toggleText('twitter')} />
+            :  <IconButton icon="chevron-down" marginLeft={majorScale(1)} marginTop="-4px" onClick={() => toggleText('twitter')} /> 
+          }</Heading>
+          {displayText.twitter 
+            ? <Text><ReactMarkdown source={twitter} /></Text> 
+            : null
+          }
+          <Heading size={500} display="flex" flexDirection="row" marginTop={majorScale(2)}>Facebook {
+            displayText.facebook
+            ?  <IconButton icon="chevron-up" marginLeft={majorScale(1)} marginTop="-4px" onClick={() => toggleText('facebook')} />
+            :  <IconButton icon="chevron-down" marginLeft={majorScale(1)} marginTop="-4px" onClick={() => toggleText('facebook')} /> 
+          }</Heading>
+          {displayText.facebook 
+            ? <Text><ReactMarkdown source={facebook} /></Text> 
+            : null
+          }
+          <Heading size={500} display="flex" flexDirection="row" marginTop={majorScale(2)}>Email {
+            displayText.email
+            ?  <IconButton icon="chevron-up" marginLeft={majorScale(1)} marginTop="-4px" onClick={() => toggleText('email')} />
+            :  <IconButton icon="chevron-down" marginLeft={majorScale(1)} marginTop="-4px" onClick={() => toggleText('email')} /> 
+          }</Heading>
+          {displayText.email 
+            ? <Text><ReactMarkdown source={email} /></Text> 
+            : null
+          }                    
+        </Pane>        
         <Pane 
           display="flex"
           justifyContent="center" 
           alignItems="center" 
           flexDirection="row"
-          marginTop={majorScale(5)}
+          marginTop={majorScale(4)}
+          width="100%"
         >
           <form onSubmit={handleSubmit}>
             <TextInputField 
@@ -66,7 +117,7 @@ const Home = () => {
               isInvalid={isAddressInvalid}
               label="Address or Zip Code"
               placeholder="123 Street"
-              width="70vw"
+              width="70vh"
             />
           </form>
           <IconButton icon="search" intent="success" onClick={handleSubmit} marginLeft={majorScale(1)}/>
@@ -74,7 +125,7 @@ const Home = () => {
         {isLoading 
           ?  <Spinner size={24} />
           : <Pane width="90vw"><ContactTable data={lookupResults} /></Pane>
-        }          
+        }        
       </Pane>        
     </>
   )

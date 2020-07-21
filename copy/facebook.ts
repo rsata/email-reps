@@ -1,0 +1,1 @@
+export default `[Representative’s name], I ask that you pressure @DonaldTrump to rescind his 6-month executive order authorizing federal officers to patrol US cities. This use of presidential power sets a detrimental precedent for its office and has violated the human rights of peaceful protestors.`
