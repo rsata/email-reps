@@ -33,6 +33,8 @@ const Row = ({
       </Table.TextCell>
       <Table.TextCell>{channels 
         ? channels.map(channel => {
+          channel.name = name
+          channel.office = office
           return <SocialIcon key={channel.id} {...channel} />
         })
         : null}

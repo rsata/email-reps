@@ -3,9 +3,20 @@ import { Button } from 'evergreen-ui'
 
 import twitter from '../../copy/twitterDynamic'
 
+const track = ({id, type, name, office}) => {
+  window.analytics.track('Link Clicked', {
+    official: name,
+    office: office,
+    type: type,
+    value: id
+  })
+}
+
 const SocialIcon = ({
   type,
-  id
+  id,
+  name,
+  office
 }) => {
   switch(type) {    
     case "Facebook": 
@@ -17,6 +28,7 @@ const SocialIcon = ({
           paddingLeft="5px" 
           paddingRight="5px" 
           marginRight="5px"
+          onClick={() => {track({id, type, name, office})}}
         > 
           <FaFacebookF size="2em" />
         </Button>        
@@ -30,6 +42,7 @@ const SocialIcon = ({
           paddingLeft="5px" 
           paddingRight="5px" 
           marginRight="5px"
+          onClick={() => {track({id, type, name, office})}}
         > 
           <FaTwitter size="2em" />
         </Button>

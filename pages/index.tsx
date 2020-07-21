@@ -51,10 +51,12 @@ const Home = () => {
     e.preventDefault()
   }
   
-  const toggleText = type => {
-    console.log(type)
+  const toggleText = type => {    
     setDisplayText({...displayText, [type]: !displayText[type]})
-    console.log(displayText)
+    window.analytics.track('Button Clicked', {
+      section: type,
+      changeTo: !displayText[type]
+    })
   }
 
   return (
