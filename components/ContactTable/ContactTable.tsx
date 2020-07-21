@@ -18,7 +18,10 @@ const ContactTable = ({data}) => {
 
   return (
     <>
-      <Table width="75em">
+      <Table 
+        width="75em" 
+        margin="auto"
+      >
         <Table.Head>
           <Table.TextHeaderCell>
             Name
