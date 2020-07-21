@@ -1,6 +1,8 @@
 import SocialIcon from './SocialIcon'
 import { Table, Avatar, Text, IconButton } from 'evergreen-ui'
 
+import email from '../../copy/emailDynamic'
+
 const conversion = (e:any):any => {
   window.analytics.track('Link Clicked', e)
 }
@@ -40,7 +42,7 @@ const Row = ({
         : null}
       </Table.TextCell>    
       <Table.TextCell>{emails 
-        ? <a onClick={() => conversion({official: name, office: office, type: 'email', value: emails[0]})} href={`mailto:${emails ? emails[0]: null}?subject=Demand for action&body=Do%20something%20better!`} target="_blank">{emails[0]}</a>
+        ? <a onClick={() => conversion({official: name, office: office, type: 'email', value: emails[0]})} href={`mailto:${emails ? emails[0]: null}?subject=Concerned Citizen&body=${encodeURI(email(name))}`} target="_blank">{emails[0]}</a>
         : 'See website for email' }
       </Table.TextCell>                    
     </Table.Row>

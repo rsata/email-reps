@@ -1,4 +1,5 @@
-export default `Dear <Representative’s name>,
+const email = name => {
+  return `Dear ${name},
 
 I’m writing to implore you to pressure President Trump to immediately rescind his 6-month executive order authorizing federal officers to patrol American cities. This use of presidential power to turn federal agents against civilians—who are exercising their constitutional right to peacefully protest—sets a detrimental precedent for the freedom of this democracy. I urge you to work with your colleagues in government to promptly investigate this use of federal law enforcement and work to overturn the president’s executive order.
 
@@ -9,5 +10,8 @@ They are tear gassing mothers, some of whom are pregnant. They are beating veter
 We cannot allow what’s happening in Portland to be the barometer for federal and military force in this nation. It is your job to protect your constituents, and the Constitution of the United States of America.
 
 Sincerely,
-XXXX
-`
+
+  `
+} 
+
+export default email

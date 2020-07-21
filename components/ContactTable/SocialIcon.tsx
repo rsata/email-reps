@@ -1,5 +1,7 @@
 import { FaFacebookF, FaTwitter } from 'react-icons/fa'
-import { Button, majorScale } from 'evergreen-ui'
+import { Button } from 'evergreen-ui'
+
+import twitter from '../../copy/twitterDynamic'
 
 const SocialIcon = ({
   type,
@@ -23,7 +25,7 @@ const SocialIcon = ({
       return (
         <Button 
           is="a" 
-          href={`https://twitter.com/intent/tweet?text=@${id} these are my requests!`}
+          href={`https://twitter.com/intent/tweet?text=@${id} ${encodeURI(twitter)}`}
           target="_blank"
           paddingLeft="5px" 
           paddingRight="5px" 
