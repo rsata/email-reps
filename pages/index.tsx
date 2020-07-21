@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { TextInputField, Pane, IconButton, majorScale, toaster, Spinner } from 'evergreen-ui'
 import ContactTable from '../components/ContactTable'
 
@@ -44,41 +44,6 @@ const Home = () => {
     e.preventDefault()
   }
 
-  if (isLoading) {
-    return (
-      <>
-        <Pane
-        display="flex"
-        alignItems="center" 
-        flexDirection="column"
-        width="100%"
-      >
-        <Pane 
-            display="flex"
-            justifyContent="center" 
-            alignItems="center" 
-            flexDirection="row"
-            marginTop={majorScale(5)}
-          >
-            <form
-              onSubmit={handleSubmit}
-            >
-              <TextInputField 
-                onChange={e => setAddress(validate(e.target.value || ''))}
-                isInvalid={isAddressInvalid}
-                label="Address or Zip Code"
-                placeholder="123 Street"
-                width="70vw"
-              />
-            </form>
-            <IconButton icon="search" intent="success" onClick={handleSubmit} marginLeft={majorScale(1)}/>
-          </Pane>        
-          <Spinner size={24} />
-      </Pane>    
-      </>
-    )
-  }
-
   return (
     <>
       <Pane
@@ -87,29 +52,29 @@ const Home = () => {
         flexDirection="column"
         width="100%"
       >
+
         <Pane 
-            display="flex"
-            justifyContent="center" 
-            alignItems="center" 
-            flexDirection="row"
-            marginTop={majorScale(5)}
-          >
-            <form
-              onSubmit={handleSubmit}
-            >
-              <TextInputField 
-                onChange={e => setAddress(validate(e.target.value || ''))}
-                isInvalid={isAddressInvalid}
-                label="Address or Zip Code"
-                placeholder="123 Street"
-                width="70vw"
-              />
-            </form>
-            <IconButton icon="search" intent="success" onClick={handleSubmit} marginLeft={majorScale(1)}/>
-          </Pane>        
-          <Pane width="90vw">
-            <ContactTable data={lookupResults} />
-          </Pane>
+          display="flex"
+          justifyContent="center" 
+          alignItems="center" 
+          flexDirection="row"
+          marginTop={majorScale(5)}
+        >
+          <form onSubmit={handleSubmit}>
+            <TextInputField 
+              onChange={e => setAddress(validate(e.target.value || ''))}
+              isInvalid={isAddressInvalid}
+              label="Address or Zip Code"
+              placeholder="123 Street"
+              width="70vw"
+            />
+          </form>
+          <IconButton icon="search" intent="success" onClick={handleSubmit} marginLeft={majorScale(1)}/>
+        </Pane>        
+        {isLoading 
+          ?  <Spinner size={24} />
+          : <Pane width="90vw"><ContactTable data={lookupResults} /></Pane>
+        }          
       </Pane>        
     </>
   )
